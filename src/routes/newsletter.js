@@ -4,22 +4,28 @@ const { NewsLetterModel } = require('../config/schema');
 const newsletter = express.Router();
 
 newsletter.post('/create',async(req,res)=>{
+    const { title ,content } = req.body;
     try {
-        const { title, content } = req.body;
-        const newsletter = new NewsLetterModel({ title, content });
-        await newsletter.save();
-        res.status(201).json({ message: 'Newsletter created successfully' });
+        const result = await client.query(
+          `INSERT INTO Newsletter (title, content) VALUES ($1, $2) RETURNING *`,
+          [title, content]
+        );
+        res.status(200).json(result.rows[0]);
       } catch (error) {
-        res.status(500).json({ error: 'Error creating newsletter' });
+        console.error('Error adding newsletter:', error.message);
+        res.status(500).json({msg:"error while adding newsletter"})
       }
 });
 
 newsletter.get('/',async(req,res)=>{
     try {
-        const newsletters = await Newsletter.find();
-        res.status(200).json(newsletters);
+        const result = await client.query(`SELECT * FROM Newsletter`);
+        res.json(result.rows);
+        return;
       } catch (error) {
-        res.status(500).json({ error: 'Error fetching newsletters' });
+        console.error('Error fetching newsletters:', error.message);
+        res.status(500).json({msg:"error fetching newslettes"});
+        return;
       }
 });
 

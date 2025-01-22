@@ -1,26 +1,38 @@
 const express = require('express');
-const { SubscriberModel, NewsLetterModel } = require('../config/schema');
+const client = require('../config/database');
 const emailService = require('../utils/emailService');
 
-const emailHanlder = express.Router();
+const emailHandler = express.Router();
 
-emailHanlder.post('/sendNewsletter',async(req,res)=>{
+emailHandler.post('/sendNewsletter', async (req, res) => {
     try {
         const { newsletterId } = req.body;
-        const newsletter = await NewsLetterModel.findById(newsletterId);
-        const subscribers = await SubscriberModel.find({ isSubscribed: true });
-    
+
+        const newsletterQuery = 'SELECT * FROM newsletters WHERE id = $1';
+        const newsletterResult = await client.query(newsletterQuery, [newsletterId]);
+
+        if (newsletterResult.rowCount === 0) {
+            return res.status(404).json({ error: 'Newsletter not found' });
+        }
+        const newsletter = newsletterResult.rows[0];
+
+        const subscribersQuery = 'SELECT email FROM subscribers WHERE is_subscribed = true';
+        const subscribersResult = await client.query(subscribersQuery);
+
+        const subscribers = subscribersResult.rows;
+
         subscribers.forEach((subscriber) => {
-          emailService.sendEmail(subscriber.email, newsletter.title, newsletter.content);
+            emailService.sendEmail(subscriber.email, newsletter.title, newsletter.content);
         });
-    
-        newsletter.sentAt = new Date();
-        await newsletter.save();
-    
+
+        const updateQuery = 'UPDATE newsletters SET sent_at = NOW() WHERE id = $1';
+        await client.query(updateQuery, [newsletterId]);
+
         res.status(200).json({ message: 'Newsletter sent successfully' });
-      } catch (error) {
+    } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Error sending newsletter' });
-      }
-})
+    }
+});
 
 module.exports = emailHandler;

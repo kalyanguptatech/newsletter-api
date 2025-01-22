@@ -1,19 +1,32 @@
-const mongoose = require('mongoose');
 
-const subscriberSchema = new mongoose.Schema({
-    email: { type: String, required: true, unique: true },
-    name: { type: String },
-    subscribedAt: { type: Date, default: Date.now },
-    isSubscribed: { type: Boolean, default: true }
-})
+// Function to create tables
+const createTables = async () => {
+  try {
+    // Create the Subscriber table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS Subscriber (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        name VARCHAR(255),
+        subscribedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        isSubscribed BOOLEAN DEFAULT TRUE
+      );
+    `);
 
-const newsletterSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    content: { type: String, required: true },
-    sentAt: { type: Date, default: null }
-})
+    // Create the Newsletter table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS Newsletter (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        content TEXT NOT NULL,
+        sentAt TIMESTAMP DEFAULT NULL
+      );
+    `);
 
-const SubscriberModel = mongoose.model("Subscriber" , subscriberSchema);
-const NewsLetterModel = mongoose.model("NewsLetter" , newsletterSchema);
+    console.log('Tables have been created successfully.');
+  } catch (error) {
+    console.error('Error creating tables:', error.message);
+  }
+};
 
-module.exports = { SubscriberModel , NewsLetterModel };
+module.exports = { createTables };
