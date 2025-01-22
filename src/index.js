@@ -15,6 +15,9 @@ const initializeApp = async () => {
 
 initializeApp();
 app.use(cors());
+app.get('/',(req,res)=>{
+    res.json("Testing");
+});
 app.use(express.json());
 app.use('/subscriber', Subscriber);
 app.use('/newsletter',newsletter);
