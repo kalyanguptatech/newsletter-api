@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use('/subscriber',subscribe);
 app.use('/newsletter',newsletter);
-app.use('/emailhandler',emailHanlder);
+app.use('/emailhandler',emailHandler);
 
 connectDB();
 app.listen(3000,()=>console.log("Server is running"));

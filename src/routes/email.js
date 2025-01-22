@@ -1,12 +1,14 @@
 const express = require('express');
+const { SubscriberModel, NewsLetterModel } = require('../config/schema');
+const emailService = require('../utils/emailService');
 
 const emailHanlder = express.Router();
 
 emailHanlder.post('/sendNewsletter',async(req,res)=>{
     try {
         const { newsletterId } = req.body;
-        const newsletter = await Newsletter.findById(newsletterId);
-        const subscribers = await Subscriber.find({ isSubscribed: true });
+        const newsletter = await NewsLetterModel.findById(newsletterId);
+        const subscribers = await SubscriberModel.find({ isSubscribed: true });
     
         subscribers.forEach((subscriber) => {
           emailService.sendEmail(subscriber.email, newsletter.title, newsletter.content);
@@ -21,4 +23,4 @@ emailHanlder.post('/sendNewsletter',async(req,res)=>{
       }
 })
 
-module.exports = emailHanlder;
+module.exports = emailHandler;
