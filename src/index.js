@@ -1,7 +1,7 @@
 const express = require('express');
 const { subscribe } = require('./routes/subscriber');
 const newsletter = require('./routes/newsletter');
-const emailHadlder = require('./routes/email');
+const emailHandler = require('./routes/email');
 const connectDB = require('./config/database');
 
 const app = express();
