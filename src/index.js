@@ -2,6 +2,7 @@ const express = require('express');
 const Subscriber  = require('./routes/subscriber');
 const newsletter = require('./routes/newsletter');
 const emailHandler = require('./routes/email');
+const cors = require('cors');
 
 const app = express();
 const { connectDB } = require('./config/database');
@@ -13,7 +14,7 @@ const initializeApp = async () => {
 };
 
 initializeApp();
-
+app.use(cors());
 app.use(express.json());
 app.use('/subscriber', Subscriber);
 app.use('/newsletter',newsletter);
