@@ -5,6 +5,7 @@ const newsletter = express.Router();
 
 newsletter.post('/create',async(req,res)=>{
     const { title ,content } = req.body;
+    console.log(req.body);
     try {
         const result = await client.query(
           `INSERT INTO Newsletter (title, content) VALUES ($1, $2) RETURNING *`,

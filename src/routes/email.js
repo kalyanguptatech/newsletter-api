@@ -1,5 +1,5 @@
 const express = require('express');
-const client = require('../config/database');
+const {client} = require('../config/database');
 const emailService = require('../utils/emailService');
 
 const emailHandler = express.Router();
@@ -8,7 +8,7 @@ emailHandler.post('/sendNewsletter', async (req, res) => {
     try {
         const { newsletterId } = req.body;
 
-        const newsletterQuery = 'SELECT * FROM newsletters WHERE id = $1';
+        const newsletterQuery = 'SELECT * FROM Newsletter WHERE id = $1';
         const newsletterResult = await client.query(newsletterQuery, [newsletterId]);
 
         if (newsletterResult.rowCount === 0) {
@@ -16,7 +16,7 @@ emailHandler.post('/sendNewsletter', async (req, res) => {
         }
         const newsletter = newsletterResult.rows[0];
 
-        const subscribersQuery = 'SELECT email FROM subscribers WHERE is_subscribed = true';
+        const subscribersQuery = 'SELECT email FROM Subscriber WHERE isSubscribed = true';
         const subscribersResult = await client.query(subscribersQuery);
 
         const subscribers = subscribersResult.rows;
@@ -25,7 +25,7 @@ emailHandler.post('/sendNewsletter', async (req, res) => {
             emailService.sendEmail(subscriber.email, newsletter.title, newsletter.content);
         });
 
-        const updateQuery = 'UPDATE newsletters SET sent_at = NOW() WHERE id = $1';
+        const updateQuery = 'UPDATE Newsletter SET sentAt = NOW() WHERE id = $1';
         await client.query(updateQuery, [newsletterId]);
 
         res.status(200).json({ message: 'Newsletter sent successfully' });
