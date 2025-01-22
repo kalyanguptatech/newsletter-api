@@ -1,5 +1,5 @@
 const express = require('express');
-const { NewsLetterModel } = require('../config/schema');
+const { client } = require('../config/database');
 
 const newsletter = express.Router();
 

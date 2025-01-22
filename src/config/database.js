@@ -1,6 +1,6 @@
 const { Client } = require('pg');
-const { DATABASE_URI } = require('./config'); 
-const { createTables } = require('./schema');
+const { DATABASE_URI } = require('./config');
+
 const client = new Client({
   connectionString: DATABASE_URI,
 });
@@ -9,14 +9,11 @@ const client = new Client({
 const connectDB = async () => {
   try {
     await client.connect();
-    await createTables();
     console.log('Database connected successfully');
   } catch (error) {
     console.error('Database connection failed:', error.message);
-    process.exit(1); 
+    process.exit(1);
   }
 };
 
-connectDB();
-
-module.exports = client;
+module.exports = { client, connectDB };

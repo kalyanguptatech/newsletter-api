@@ -1,5 +1,5 @@
 const express = require('express');
-const client = require('../config/database');
+const {client} = require('../config/database');
 
 const subscriber = express.Router();
 
@@ -10,9 +10,10 @@ subscriber.post('/subscribe',async (req,res)=>{
           `INSERT INTO Subscriber (email, name) VALUES ($1, $2) RETURNING *`,
           [email, name]
         );
-        return result.rows[0];
+        res.status(200).json(result.rows[0]);
       } catch (error) {
         console.error('Error adding subscriber:', error.message);
+        res.status(500).json({msg:'error while adding subscriber'});
       }
 })
 

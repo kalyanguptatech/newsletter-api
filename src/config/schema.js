@@ -1,3 +1,4 @@
+const { client } = require('./database');
 
 // Function to create tables
 const createTables = async () => {
