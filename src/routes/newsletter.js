@@ -3,8 +3,8 @@ const { client } = require('../config/database');
 
 const newsletter = express.Router();
 
-newsletter.post('/drop',async(req,res)=>{
-  const { newsletterId } = req.body;
+newsletter.get('/drop/:newsletterId', async (req, res) => {
+  const { newsletterId } = req.params; // Extract newsletterId from the URL parameters
 
   try {
     const result = await client.query(
@@ -22,6 +22,7 @@ newsletter.post('/drop',async(req,res)=>{
     res.status(500).json({ msg: "Error while deleting newsletter" });
   }
 });
+
 
 newsletter.post('/create',async(req,res)=>{
     const { title ,content } = req.body;
