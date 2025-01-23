@@ -3,7 +3,7 @@ const { client } = require('../config/database');
 
 const newsletter = express.Router();
 
-newsletter.get('/drop/:newsletterId', async (req, res) => {
+newsletter.get('/:newsletterId', async (req, res) => {
   const { newsletterId } = req.params; // Extract newsletterId from the URL parameters
 
   try {
