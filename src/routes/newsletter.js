@@ -3,6 +3,26 @@ const { client } = require('../config/database');
 
 const newsletter = express.Router();
 
+newsletter.post('/drop',async(req,res)=>{
+  const { newsletterId } = req.body;
+
+  try {
+    const result = await client.query(
+      `DELETE FROM Newsletter WHERE id = $1 RETURNING *`,
+      [newsletterId]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ msg: "Newsletter not found" });
+    }
+
+    res.status(200).json({ msg: "Newsletter deleted successfully", deletedNewsletter: result.rows[0] });
+  } catch (error) {
+    console.error('Error deleting newsletter:', error.message);
+    res.status(500).json({ msg: "Error while deleting newsletter" });
+  }
+});
+
 newsletter.post('/create',async(req,res)=>{
     const { title ,content } = req.body;
     console.log(req.body);
@@ -30,24 +50,5 @@ newsletter.get('/',async(req,res)=>{
       }
 });
 
-newsletter.post('/drop',async(req,res)=>{
-  const { newsletterId } = req.body;
-
-  try {
-    const result = await client.query(
-      `DELETE FROM Newsletter WHERE id = $1 RETURNING *`,
-      [newsletterId]
-    );
-
-    if (result.rowCount === 0) {
-      return res.status(404).json({ msg: "Newsletter not found" });
-    }
-
-    res.status(200).json({ msg: "Newsletter deleted successfully", deletedNewsletter: result.rows[0] });
-  } catch (error) {
-    console.error('Error deleting newsletter:', error.message);
-    res.status(500).json({ msg: "Error while deleting newsletter" });
-  }
-});
 
 module.exports = newsletter ;
