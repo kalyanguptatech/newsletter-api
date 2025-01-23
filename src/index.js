@@ -15,7 +15,7 @@ const initializeApp = async () => {
 
 initializeApp();
 app.use(cors({
-  origin: ['http://localhost:5174', 'https://news-manager-chi.vercel.app','https://devplexity-mern.vercel.app'], // Allow these origins
+  origin: ['http://localhost:5174', 'https://news-manager-chi.vercel.app','https://devplexity.com/'], // Allow these origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
   credentials: true // Allow cookies and credentials
