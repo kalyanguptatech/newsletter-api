@@ -8,17 +8,12 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "src/index.js"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/subscriber/subscribe",
+      "src": "/subscriber/subscribe",
+      "dest": "src/index.js",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://devplexity.com https://news-manager-chi.vercel.app" 
+          "value": "*"
         },
         {
           "key": "Access-Control-Allow-Methods",
@@ -35,11 +30,12 @@
       ]
     },
     {
-      "source": "/(.*)",
+      "src": "/(.*)",
+      "dest": "src/index.js",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://devplexity.com https://news-manager-chi.vercel.app"
+          "value": "*"
         },
         {
           "key": "Access-Control-Allow-Methods",
