@@ -30,7 +30,7 @@ newsletter.get('/',async(req,res)=>{
       }
 });
 
-newsletter.post('/delete',async(req,res)=>{
+newsletter.delete('/',async(req,res)=>{
   const { newsletterId } = req.body;
 
   try {
