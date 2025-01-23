@@ -6,66 +6,53 @@
       "use": "@vercel/node"
     }
   ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://news-manager-chi.vercel.app"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        },
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        }
+      ]
+    }
+  ],
   "routes": [
     {
       "src": "/subscriber/subscribe",
-      "dest": "src/index.js",
-      "headers": {
-        "Access-Control-Allow-Origin": "https://news-manager-chi.vercel.app",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Credentials": "true"
-      }
-    },
-    {
-      "src": "/subscriber",
-      "dest": "src/index.js",
-      "headers": {
-        "Access-Control-Allow-Origin": "https://news-manager-chi.vercel.app",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Credentials": "true"
-      }
+      "dest": "src/index.js"
     },
     {
       "src": "/subscriber/unsubscribe",
-      "dest": "src/index.js",
-      "headers": {
-        "Access-Control-Allow-Origin": "https://news-manager-chi.vercel.app",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Credentials": "true"
-      }
+      "dest": "src/index.js"
+    },
+    {
+      "src": "/subscriber",
+      "dest": "src/index.js"
+    },
+    {
+      "src": "/newsletter/create",
+      "dest": "src/index.js"
     },
     {
       "src": "/newsletter/:newsletterId",
-      "dest": "src/index.js",
-      "headers": {
-        "Access-Control-Allow-Origin": "https://news-manager-chi.vercel.app",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Credentials": "true"
-      }
-    },
-     {
-      "src": "/newsletter/create",
-      "dest": "src/index.js",
-      "headers": {
-        "Access-Control-Allow-Origin": "https://news-manager-chi.vercel.app",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Credentials": "true"
-      }
+      "dest": "src/index.js"
     },
     {
       "src": "/emailhandler/sendNewsletter",
-      "dest": "src/index.js",
-      "headers": {
-        "Access-Control-Allow-Origin": "https://news-manager-chi.vercel.app",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Credentials": "true"
-      }
-    },
+      "dest": "src/index.js"
+    }
   ]
 }
