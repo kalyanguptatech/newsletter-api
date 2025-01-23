@@ -17,7 +17,7 @@ initializeApp();
 app.use(cors({
   origin: ['http://localhost:5174', 'https://news-manager-chi.vercel.app','https://devplexity.com/'], // Allow these origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  allowedHeaders: ['Content-Type'], // Allowed headers
   credentials: true // Allow cookies and credentials
 }));
 app.get('/',(req,res)=>{
