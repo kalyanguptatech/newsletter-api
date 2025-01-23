@@ -8,52 +8,24 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "src/index.js"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/subscriber/subscribe",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://devplexity.com https://news-manager-chi.vercel.app"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, DELETE, OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
-        },
-        {
-          "key": "Access-Control-Allow-Credentials",
-          "value": "true"
-        }
-      ]
+      "src": "/subscriber/subscribe",
+      "dest": "src/index.js",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://devplexity.com",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Credentials": "true"
+      }
     },
     {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://devplexity.com https://news-manager-chi.vercel.app" 
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, DELETE, OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
-        },
-        {
-          "key": "Access-Control-Allow-Credentials",
-          "value": "true" 
-        }
-      ]
+      "src": "/(.*)",
+      "dest": "src/index.js",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://devplexity.com",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Credentials": "true"
+      }
     }
   ]
 }
