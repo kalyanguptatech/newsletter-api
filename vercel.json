@@ -8,8 +8,24 @@
   ],
   "routes": [
     {
+      "src": "/subscriber/subscribe",
+      "dest": "src/index.js",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://news-manager-chi.vercel.app/",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Credentials": "true"
+      }
+    },
+    {
       "src": "/(.*)",
-      "dest": "src/index.js"
+      "dest": "src/index.js",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://news-manager-chi.vercel.app/",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Credentials": "true"
+      }
     }
   ]
 }
