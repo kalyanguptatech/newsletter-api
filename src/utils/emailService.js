@@ -7,7 +7,7 @@ exports.sendEmail = async (to, subject, content) => {
       service: 'Gmail',
       auth: {
         user: "contactdevplexity@gmail.com", // Your Gmail address
-        pass: "rxyk gneq xhfi wboo", // App Password generated from Google
+        pass: "nsqr qkwy fnxj quuf", // App Password generated from Google
       },
     });
 
