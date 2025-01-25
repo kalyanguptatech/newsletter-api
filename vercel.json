@@ -29,30 +29,4 @@
       ]
     }
   ],
-  "routes": [
-    {
-      "src": "/subscriber/subscribe",
-      "dest": "src/index.js"
-    },
-    {
-      "src": "/subscriber/unsubscribe",
-      "dest": "src/index.js"
-    },
-    {
-      "src": "/subscriber",
-      "dest": "src/index.js"
-    },
-    {
-      "src": "/newsletter/create",
-      "dest": "src/index.js"
-    },
-    {
-      "src": "/newsletter/:newsletterId",
-      "dest": "src/index.js"
-    },
-    {
-      "src": "/emailhandler/sendNewsletter",
-      "dest": "src/index.js"
-    }
-  ]
 }
