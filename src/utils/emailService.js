@@ -4,13 +4,14 @@ require('dotenv').config();
 exports.sendEmail = async (to, subject, content) => {
   try {
     const transporter = nodemailer.createTransport({
-      service: 'Gmail',
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false, // true for port 465, false for other ports
       auth: {
         user: "contactdevplexity@gmail.com", 
         pass: "ivdt zygq rxpg krjc", 
       },
     });
-
     const mailOptions = {
       from: "contactdevplexity@gmail.com", // Sender's email
       to, // Recipient email
