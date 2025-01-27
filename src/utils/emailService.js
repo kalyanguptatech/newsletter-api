@@ -13,7 +13,7 @@ exports.sendEmail = async (to, subject, content) => {
       },
     });
     const mailOptions = {
-      from: "contactdevplexity@gmail.com", // Sender's email
+      from: "newsletter@devplexity.com", // Sender's email
       to, // Recipient email
       subject, // Email subject
       text: content, // Email body (text format)
