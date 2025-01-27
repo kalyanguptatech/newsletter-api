@@ -6,7 +6,7 @@ exports.sendEmail = async (to, subject, content) => {
     const transporter = nodemailer.createTransport({
       host: "smtp.hostinger.com",
       port: 465,
-      secure: false, // true for port 465, false for other ports
+      secure: true, // true for port 465, false for other ports
       auth: {
         user: "newsletter@devplexity.com", 
         pass: "786004@Devplexity", 
