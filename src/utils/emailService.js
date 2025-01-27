@@ -4,12 +4,12 @@ require('dotenv').config();
 exports.sendEmail = async (to, subject, content) => {
   try {
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
+      host: "smtp.hostinger.com",
+      port: 465,
       secure: false, // true for port 465, false for other ports
       auth: {
-        user: "contactdevplexity@gmail.com", 
-        pass: "ivdt zygq rxpg krjc", 
+        user: "newsletter@devplexity.com", 
+        pass: "786004@Devplexity", 
       },
     });
     const mailOptions = {
